@@ -11,8 +11,9 @@ import Diagnosis from './Components/Diagnosis/Diagnosis';
 function App() {
   return ( 
     < >
+    
       
-      {/* <Router>
+      <Router>
           <Routes>
             <Route path='/' element={<Layout />} >
               <Route index element={<Home />} />
@@ -23,7 +24,7 @@ function App() {
               <Route path="/diagnosis" element={<Diagnosis />} />
             </Route>
           </Routes>
-        </Router> */}
+        </Router>
       
       
      
