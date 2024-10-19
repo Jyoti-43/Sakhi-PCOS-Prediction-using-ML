@@ -7,12 +7,14 @@ import About from "./Components/About/AboutUs";
 import Login from "./Components/Login/Login";
 import SignUp from "./Components/SignUp/SignUp";
 import Diagnosis from './Components/Diagnosis/Diagnosis';
+import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
+import ChangePassword from './Components/ForgetPassword/ChangePassword';
 
 function App() {
   return ( 
     < >
       
-      {/* <Router>
+      <Router>
           <Routes>
             <Route path='/' element={<Layout />} >
               <Route index element={<Home />} />
@@ -21,9 +23,11 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/diagnosis" element={<Diagnosis />} />
+              <Route path="/forgetpassword" element={<ForgetPassword />} />
+              <Route path="/changepassword" element={<ChangePassword />} />
             </Route>
           </Routes>
-        </Router> */}
+        </Router>
       
       
      
