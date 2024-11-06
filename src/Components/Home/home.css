@@ -1,22 +1,44 @@
 .container{
     display: flex;
     justify-content: center;
+    margin-top: 340px;
+    padding: 10px;
+    margin-left: 20px;
+}
+.section{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding: 10px;
+      margin-right:50px;
+      border-radius: 15px;
+      /* background-color: #ee98c5;
+       */
+     
 }
  .text{
    margin-top: 40px;
-  
    margin-bottom: 10px;
-    align-items: center;
+   align-items: center;
+   font-size: 30px;
+   font-weight: bold;
+   color: #000;
+   padding-left: 10px;
  }
  .section  img{
-    width: 450px;
-    height: 300px;
+    width: 750px;
+    height: 340px;
     margin-bottom: 5px;
-    padding-left: 10px;
+    padding-left: 20px;
     border-radius: 15px;
  }
 
- .hero-section{
-    margin-top: 340px;
-    padding: 10px;
+   
+ .row{
+      
+      flex-wrap: wrap;
+      margin-right: 10px;
  }

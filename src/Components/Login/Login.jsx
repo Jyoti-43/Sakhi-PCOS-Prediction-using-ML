@@ -32,6 +32,31 @@ const Login = ({ isLoggedIn }) => {
     });
   };
 
+
+  useEffect(() => {
+    const initializeGoogleSignIn = () => {
+      window.google.accounts.id.initialize({
+        client_id: '391082617038-81ad5f9mn36u9rfarj1b2qjnppb2du8m.apps.googleusercontent.com',
+        callback: onGoogleSignIn,
+      });
+      window.google.accounts.id.renderButton(
+        document.getElementById('google-signin-button'),
+        { theme: 'outline', size: 'large' }
+      );
+    };
+
+    if (window.google && window.google.accounts) {
+      initializeGoogleSignIn();
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = initializeGoogleSignIn;
+      document.body.appendChild(script);
+    }
+  }, []);
+
   const handleClick = () => navigate("/signUp");
 
   const handleSubmit = async (e) => {
@@ -44,6 +69,30 @@ const Login = ({ isLoggedIn }) => {
     } catch (error) {
       console.log(error);
       // Handle login error
+    }
+  };
+
+  const onGoogleSignIn = async (response) => {
+    const id_token = response.credential;
+
+    try {
+      const res = await axios.post('http://127.0.0.1:8000/api/user/google-signin/', {
+        token: id_token,
+    }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = res.data;
+      if (data.success) {
+        localStorage.setItem('token', data.token);
+        navigate("/"); // Redirect to home page after successful sign-in
+      } else {
+        console.error('Authentication failed:', data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error.response || error.message);
     }
   };
 
@@ -102,7 +151,15 @@ const Login = ({ isLoggedIn }) => {
                     </button>
                   </div>
                 </div>
-                <hr />
+                <div className="mt-3 d-flex justify-content-center align-items-center" style={{ position: 'relative', width: '100%' }}>
+                <div style={{ flex: '1', borderBottom: '1px solid #000', margin: '0 10px' }}></div>
+                <p style={{ margin: '0' }}>Or</p>
+                <div style={{ flex: '1', borderBottom: '1px solid #000', margin: '0 10px' }}></div>
+              </div>
+                <div className="mt-2 d-flex justify-content-center">
+                
+                <div id="google-signin-button"></div>
+                </div>
                 <p>Already Have Account?</p>
                 <button className="create" onClick={handleClick}>
                   Sign In

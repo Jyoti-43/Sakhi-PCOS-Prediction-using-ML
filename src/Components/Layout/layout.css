@@ -5,14 +5,14 @@
     font-family: sans-serif;
 }
 body{
-background-color: #dc3545;
+background-color: #dd8ec4;
 }
 
 
 
 
 #header{
-    background-color: #edce1c93;
+    background-color: #766403a7;
     color: beige;
     transition: all 0.5s;
     z-index: 990;
