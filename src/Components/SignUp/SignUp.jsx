@@ -131,15 +131,15 @@ const SignUp = () => {
 
   return (
     <header>
-      <div className="container">
+      {/* <div className="container"> */}
         <div className="signup-container">
-          <div className="container-body">
+          <div className="signup-body">
             <form onSubmit={handleSubmit} className="signup-form">
               <div className="field">
               <h2 className="text-overlay">Welcome, to signIn page</h2>
                 <hr />
                 <div className="form-group">
-                  <label style={{ display: "block", textAlign: "left" }}>Full Name:</label>
+                  <label  className="form-label" style={{ display: "block", textAlign: "left" }}>Full Name:</label>
                   <input
                     type="text"
                     name="name"
@@ -150,7 +150,7 @@ const SignUp = () => {
                   {errors.name && <div className="error">{errors.name}</div>}
                 </div>
                 <div className="form-group">
-                  <label style={{ display: "block", textAlign: "left" }}>Email:</label>
+                  <label className="form-label" style={{ display: "block", textAlign: "left" }}>Email:</label>
                   <input
                     type="email"
                     name="email"
@@ -161,7 +161,7 @@ const SignUp = () => {
                   {errors.email && <div className="error">{errors.email}</div>}
                 </div>
                 <div className="form-group">
-                  <label style={{ display: "block", textAlign: "left" }}>Password:</label>
+                  <label className="form-label" style={{ display: "block", textAlign: "left" }}>Password:</label>
                   <input
                     type="password"
                     name="password"
@@ -172,7 +172,7 @@ const SignUp = () => {
                   {errors.password && <div className="error">{errors.password}</div>}
                 </div>
                 <div className="form-group">
-                  <label style={{ display: "block", textAlign: "left" }}>Confirm Password:</label>
+                  <label className="form-label" style={{ display: "block", textAlign: "left" }}>Confirm Password:</label>
                   <input
                     type="password"
                     name="confirmPassword"
@@ -182,10 +182,10 @@ const SignUp = () => {
                   />
                   {errors.confirmPassword && <div className="error">{errors.confirmPassword}</div>}
                 </div>
-                <div className="submit-container">
-                  <div className="submit">
-                    <button  type="submit">Register</button>
-                  </div>
+                <div className="submit-container d-flex justify-content-center align-items-center ">
+                  
+                    <button  type="submit" className="submit-button">Register</button>
+                 
                 </div>
               </div>
               <div className="mt-3 d-flex justify-content-center align-items-center" style={{ position: 'relative', width: '100%' }}>
@@ -198,12 +198,12 @@ const SignUp = () => {
                 <div id="google-signin-button"></div>
                 </div>
               <div className="mt-3 d-flex justify-content-center">
-                <p className="ml-2">Already have an account? <Link to="/login">Login</Link></p>
+                <p className="ml-2">Already have an account? <Link to="/login" className="login-link">Login</Link></p>
               </div>
             </form>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </header>
   );
 };

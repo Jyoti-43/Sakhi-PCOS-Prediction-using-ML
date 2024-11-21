@@ -1,49 +1,72 @@
-.container{
+
+.signup-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
     margin: 20px 20px 20px 20px;
     padding-top: 50px;
     padding-bottom: 5px;
-   
-}
-.signup-container{
-    display: flex;
-   
-    flex-wrap: wrap;
-    margin: 0px;
-    flex-wrap: wrap;
-    
-}
-.container .signup-container {
     flex: 1;
     justify-content: center;
     padding-right: 24px;
-    padding-top: 50px;
+    padding-top: 20px;
+    
 }
-.container-body{
+ 
+.signup-body{
 
     display: flex;
     flex-wrap: wrap;
-    margin: 30px;
+    margin: 10px;
     padding: 25px;
     flex-wrap: wrap;
-    background-color: rgb(233, 133, 195);
+    background-color: #9DBC98;
     box-sizing: border-box;
     border-radius: 5px;
+  width: 35%;
 }
 
-.container-body h2{
+.signup-body h2{
     color: black;
     margin: 0;
     font-weight: bolder;
 }
-label{
+.form-body{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    padding-left: 25px;
+    flex-wrap: wrap;
+    background-color: #9DBC98;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width:90%;
+}
+
+.signup-body .field{
+    width: inherit;
+    justify-content: center;
+    padding: 10px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    /* border: 1px solid #ccc; */
+    box-sizing: border-box;
+    border-radius: 5px;
+
+}
+.signup-form{
+    width: 100%;
+}
+
+.form-label{
    
-    font-weight: 535;
+    font-weight:100px;
     font-size: medium;
     color: black;
     margin: 0;
     padding: 0;
-   
-   
+    /* padding: 10px 12px; */
+    margin: 8px 0;
 }
 input{
     width: 100%;
@@ -53,15 +76,21 @@ input{
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 5px;
+    background-color: aliceblue;
 }
-button{
-   
-    width: 40%;
-    background-color: #db16ce;
+.submit-button{
+    background-color: #0a8284;
     color: white;
-    padding: 10px 10px;
-    margin: 5px 0;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+.login-link{
+    text-decoration:none;
+    color: blue;
+    font-weight: bold;
+}
+.login-link:hover{
+    color: darkblue;
+    text-decoration: underline;
 }
