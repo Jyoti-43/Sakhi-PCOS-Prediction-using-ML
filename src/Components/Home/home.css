@@ -1,7 +1,7 @@
-.container{
+.home-container{
     display: flex;
     justify-content: center;
-    margin-top: 340px;
+    margin-top: 40px;
     padding: 10px;
     margin-left: 20px;
 }
