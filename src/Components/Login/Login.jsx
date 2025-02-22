@@ -106,7 +106,7 @@ const Login = ({ isLoggedIn }) => {
         <div className="row login-body align-items-center">
           <div className="col login-logo mb-0">
             <img
-              src="./assets/img/aviyanLogo.png"
+              src="./assets/img/Sakhi_Logo.png"
               alt="Logo"
               className="logo-img"
             />
@@ -121,7 +121,7 @@ const Login = ({ isLoggedIn }) => {
               <div className="form-body">
                 <div className="caption-text">
                   <h2>Welcome to Sakhi</h2>
-                  <p>Please log into the form</p>
+                  <p>Please Sign In to the form</p>
                   <hr />
                 </div>
 
@@ -159,7 +159,7 @@ const Login = ({ isLoggedIn }) => {
 
                   <div className="login">
                     <button type="submit" className="login-btn">
-                      Login
+                      SignIn
                     </button>
                   </div>
                 </div>

@@ -1,4 +1,5 @@
 
+
 .signup-container{
     display: flex;
     flex-wrap: wrap;
@@ -20,7 +21,7 @@
     margin: 10px;
     padding: 25px;
     flex-wrap: wrap;
-    background-color: #9DBC98;
+    background-color: #c2d1f1;
     box-sizing: border-box;
     border-radius: 5px;
   width: 35%;
@@ -37,7 +38,7 @@
     margin: 10px;
     padding-left: 25px;
     flex-wrap: wrap;
-    background-color: #9DBC98;
+    background-color: #c2c2f1;
     box-sizing: border-box;
     border-radius: 5px;
     width:90%;
@@ -58,32 +59,45 @@
     width: 100%;
 }
 
-.form-label{
-   
+.text-overlay{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+}
+
+.signup-body .form-label{
     font-weight:100px;
-    font-size: medium;
-    color: black;
+    font-size: large;
+    color: rgb(28, 38, 177);
     margin: 0;
     padding: 0;
     /* padding: 10px 12px; */
-    margin: 8px 0;
+    margin:  0;
+
 }
 input{
     width: 100%;
     padding: 10px 12px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #eee1e8;
     box-sizing: border-box;
     border-radius: 5px;
     background-color: aliceblue;
 }
 .submit-button{
-    background-color: #0a8284;
+    background-color: #af0b99;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    padding: 15px 25px;
+    font-size: x-large;
+    font-weight: bold;
+    font-family: var(--font-secondary);
+    
 }
 .login-link{
     text-decoration:none;
@@ -93,4 +107,8 @@ input{
 .login-link:hover{
     color: darkblue;
     text-decoration: underline;
+}
+.signup-form div p{
+    font-size: large;
+   font-family: var(--font-secondary);
 }

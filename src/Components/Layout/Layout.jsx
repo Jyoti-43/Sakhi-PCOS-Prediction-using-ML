@@ -17,10 +17,11 @@ const Layout = () => {
         id="header"
         className="header d-flex align-items-center fixed-top m-0"
       >
-        <div className="container-fluid container-xl d-flex align-items-center justify-content-between ">
+        <div className="container container-xl d-flex align-items-center justify-content-between ">
+          
           <div className="logo mx-0 pt-1">
-            Logo
-            {/* <img src="assets/img/aviyanLogo.png" className='' alt="Aviyan Sarathi" style={{ maxWidth: '250px', maxHeight: '150px' }} /> */}
+          
+            <img src="assets/img/Sakhi-logo.png" className='sakhi-logo' alt="Sakhi"  />
           </div>
           {/* new 
           <input type="checkbox" id="sidebar-active" />
@@ -32,16 +33,9 @@ const Layout = () => {
           <label id="overlay" for="sidebar-active"></label>
          new end */}
 
-          <div className="position-relative">
+          <div className="position-static">
             <nav id="navbar" className="navbar navbar-expand-lg  navbar-dark ">
               <div className="navbar-nav mr-auto mt-2 mt-lg-0">
-                {/* new 
-                <label for="sidebar-active" className='close-sidebar-button'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-                  </svg>
-                </label>
-                 end */}
 
                 <ul>
                   <li type="none" className="nav-item">
@@ -98,7 +92,7 @@ const Layout = () => {
         <div className="footer-content py-3 ">
           <div className="footer-container ">
             {/* <div className="row "> */}
-              <div className="footer-about col-lg-2">
+              <div className="footer-about col-lg-1">
                 <h3 className="footer-heading mx-0">
                   {" "}
                   <Link to="/about" className="text-white ">
@@ -106,7 +100,7 @@ const Layout = () => {
                     About{" "}
                   </Link>
                 </h3>
-                <h5 className="footer-para">Somethings Here........</h5>
+                <p className="footer-para">Somethings Here........</p>
               </div>
 
 

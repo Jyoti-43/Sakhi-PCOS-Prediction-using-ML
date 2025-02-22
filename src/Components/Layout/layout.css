@@ -2,65 +2,111 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  font-family: sans-serif;
+ 
 }
 body {
-  background-color: #dd8ec4;
+  background-color: #f6f0f3;
 }
 
 #header {
-  background-color: #766403a7;
-  color: beige;
+  /* background-color: #fff0f7; */
+  background-color: #f2f4ee;
   transition: all 0.5s;
   z-index: 990;
-  height: 85px;
+  height: 95px;
   display: flex;
-}
-.navbar ul {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  list-style: none;
-  align-items: center;
-}
-.navbar li {
-  position: relative;
+  box-sizing: border-box;
+  border-bottom: 1px solid ; 
+  box-shadow: #003b78;
+ 
 }
 
-.navbar a,
-.navbar a:focus {
+
+
+#header .sakhi-logo{
+  display: flex;
+  justify-content: flex-start;
+  top: 0px;
+  left: 0px;
+  margin-left: 35px;
+  position: absolute;
+  padding: 2px;
+  padding-left: 15px;
+  max-width: 280px;
+  max-height:100px ;
+  
+}
+
+nav{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  z-index: -1;
+  
+}
+.navbar ul {
+ margin:0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style: none;
+  padding-left: 15%;
+  
+}
+
+
+/* .navbar li,
+.navbar li:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 0 10px 30px;
-  font-family: sans-serif;
+  font-family: var(--font-secondary);
   font-size: 16px;
   font-weight: 500;
   color: black;
   white-space: nowrap;
   transition: 0.3s;
-}
-.navbar a i,
-.navbar a:focus i {
-  font-size: 12px;
-  line-height: 0;
-  margin-left: 5px;
-}
+} */
+
 
 .nav-item .nav-link {
-  color: black;
+  
+  color: #003b78;
   text-transform: uppercase;
+  font-family: var(--font-primary);
+  font-weight: 550;
+  font-size: large;
 }
-.nav-link:hover,
-.nav-link:active {
-  color: rgb(228, 151, 43);
-  transition: 5s;
+.nav-item .nav-link:hover{
+  color:blue;
   text-decoration: underline;
+  font-family: var(--font-secondary);
+  font-size: medium;
+  
 }
+.nav-item .nav-link:active,
+.nav-link:focus
+ {
+  text-decoration: underline;
+  font-family: var(--font-secondary);
+  font-size: medium;
+}
+
 /* header button */
 .btn {
-  background-color: rgb(100, 100, 13);
+  background-color: #f507b9;
   color: white;
+  font-weight:bold;
+  font-size: large;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 25px, 25px;
+  margin-right:50px;
+  width: max-content;
+  height: fit-content;
+
 }
 .btn a:hover {
   text-decoration: underline;
@@ -96,7 +142,8 @@ body {
   margin-right: 5px;
   column-gap: 20px;
   row-gap: 20px;
-  background-color: #12020b;
+  /* background-color: #12020b; */
+  background-color: #003b78;
 }
 
 /* done */
@@ -112,7 +159,7 @@ body {
   margin-right: 9px;
   column-gap: 20px;
   row-gap: 20px;
-  background-color: #12020b;
+  /* background-color: #12020b; */
 }
 
 /* done */
@@ -124,10 +171,10 @@ body {
   max-width: max-content;
   margin: 10px;
   padding: 7px;
-  background-color: #0e0309;
+  /* background-color: #0e0309; */
 }
 /* done */
-.footer .footer-heading {
+.footer-heading {
   display: flex;
   align-self: start;
   align-items: normal;
@@ -135,6 +182,7 @@ body {
   padding-bottom: 10px;
   font-size: x-large;
   color: white;
+  font-family:var(--font-primary);
 }
 /* done */
 .footer-links {
@@ -145,14 +193,14 @@ body {
   padding: 5px;
   font-weight: medium;
   font-size: large;
-  font-family: sans-serif;
+  font-family: var(--font-secondary);
 }
 
 /* done */
 .footer-para {
   padding: 0;
   margin-top: 0px;
-  font-family: "Times New Roman", Times, serif;
+  font-family: var(--font-secondary);
   color: white;
 }
 
@@ -169,7 +217,7 @@ body {
   margin: 0 15px;
   /* top right bottom left */
   padding: 10px;
-  background-color: #0d1005;
+  /* background-color: #0d1005; */
 }
 
 /* done */
