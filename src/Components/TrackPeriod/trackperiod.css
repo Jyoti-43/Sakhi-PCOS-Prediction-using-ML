@@ -1,348 +1,425 @@
 .period-container {
-    padding: 0;
-  }
+  padding: 0;
+}
+
+.track-section {
+  width: 80%;
+  margin: 20px 0;
+}
+
+.track-content {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  column-gap: 10px;
+  padding: 10px;
+  width: 100%;
+
+  /* background: linear-gradient(to right, #dac9d1,#bdcdd1,  #b5c0cb); */
+}
+.track-period {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  left: 0%;
+  margin: 10px 10px;
+  margin-top: 9%;
   
-  .track-section {
-    width: 80%;
-    margin: 20px 0;
-  }
-  
-  .track-content {
-    display: flex;
+  padding: 10px;
+  box-sizing: border-box;
+  gap: 5%;
+  /* border: solid 2px rgb(168, 168, 189);
+  border-radius: 15px; */
+}
+.track-period h1 {
+  text-align: center;
+  align-items: center;
+  color: #f507b9;
+  margin: 5px 10px;
+  padding: 5px;
+  font-family: var(--font-primary);
+  font-size: 35px;
+  font-weight: 550;
+  width: 100%;
+}
+.period-start{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 18px;
+  width: 60%;
+}
+.period-start-label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 2px;
+  padding: 5px;
+  width: 250px;
+  gap: 50px;
+}
+
+.period-start-radio{
+  width: 25px!important;
+  height: 40px!important;
+  padding: 2px!important;
+}
+.period-prediction{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  width: 550px;
+}
+
+.react-calendar{
+  width: 520px;
+}
+.track-period p {
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  font-family: var(--font-secondary);
+  font-size: 18px;
+  font-weight: 500;
+}
+hr {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(168, 168, 189);
+}
+
+.period-date {
+  display: flex;
+  column-gap: 50px;
+  align-items: center;
+  margin: 15px;
+  margin-top: 25px;
+  width: 100%;
+}
+.period-date h4 {
+  padding: 0;
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-family: var(--font-secondary);
+}
+
+.custom-datepicker__input {
+  font-size: 18px; /* Increase the font size */
+  margin-right: 8%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.track-period .cycle-length {
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.cycle-length h4 {
+  font-family: var(--font-secondary);
+  font-size: 18px;
+}
+
+.track-period .next-period h4 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 5px;
+  padding: 5px;
+}
+
+.error-message {
+  color: red;
+  font-size: 18px;
+  font-family: var(--font-secondary);
+  font-weight: 450;
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.track-period .img-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* margin: 10px; */
+  padding: 10px;
+  width: 40%;
+}
+.img-section .track-img {
+  width: 655px;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 17%;
+  margin-left: 40px;
+  margin-right: 20px;
+  border-radius: 15px;
+}
+
+/* diet Plan css */
+.diet-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  column-gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.meal-plan {
+  margin: 0;
+  padding: 0;
+}
+
+.meal-photo {
+  padding-top: 25px;
+  width: 100%;
+  height: 400px; /* Adjust the height as needed for the banner */
+  overflow: hidden; /* Ensure the image doesn't overflow its container */
+  /* background: linear-gradient(to right, #edb9d1,  #b2cbe4);
+   */
+}
+.meal-photo h1 {
+  text-align: center;
+  margin: 5px;
+  padding-left: 20px;
+  font-family: var(--font-primary);
+  font-weight: 550;
+  font-size: 35px;
+}
+
+.meal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+.diet-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px 20%;
+  padding: 10px;
+  text-align: left;
+  text-wrap: wrap;
+  font-family: var(--font-secondary);
+}
+.diet-content h3 {
+  font-family: var(--font-primary);
+  font-size: 35px;
+  font-weight: 550;
+  color: #003b78;
+}
+.diet-content h2 {
+  font-family: var(--font-primary);
+  font-size: 35px;
+  font-weight: 550;
+  color: #003b78;
+}
+.diet-content p {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: var(--font-secondary);
+  margin-bottom: 15px;
+}
+
+.diet-content ul {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: var(--font-secondary);
+}
+ul li {
+  margin: 5px;
+  padding: 5px;
+}
+ul li::marker {
+  color: #003b78; /* Change the bullet color */
+}
+
+.modal-symptoms{
+  width: 100% !important;
+  height: 100% !important; ;
+  display: flex !;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.modal-content-symptoms{
+  width: 30% !important;
+  display: flex;
     justify-content: center;
-    align-content: center;
-    column-gap: 10px;
-    padding: 10px;
-    width: 100%;
+    align-items: flex-start;
+    background: white;
+    height:500px !important;
+    padding: 20px;
+    border-radius: 8px;
+    /* text-align: left */
+}
+.symptoms-form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  /* margin-bottom: 10px; */
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.symptoms-table{
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  border-collapse: collapse;
+  margin: 6px 0;
+  font-size: 18px;
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  text-align: center;
+}
+
+.symptoms-table  td, th {
+  /* padding: 10px!important; */
+  width: 100% !important;
+  margin-right: 10px !important;
+  padding:0  20px !important;
+}
+
+.symptom-checkbox{
+  width: 25px!important;
+  height: 35px!important;
+  padding-left: 20px!important;
+  text-align: left;
+  margin-left: 90px;
+}
+
+.close{
+  top: 10px;  /* Adjust the top distance */
+  right: 50px;
+  background: transparent;
+  border: none;
+  font-size: 36px; /* Increase the size */
+  cursor: pointer;
+  color: black;
+  transition: color 0.3s ease;
+}
+.symptom-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 8%;
+  padding: 10px;
+  /* width: 0px; */
+}
+.add-symptom-btn {
+  background-color: #f507b9; /* Green background */
+  border: none; /* Remove default border */
+  color: white; /* White text */
+  padding: 15px 32px; /* Spacing inside the button */
+  text-align: center; /* Align text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Allows padding and margin */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 12px; /* Rounded corners */
+  margin-top: 10px;
+  /* margin-right: 50px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+}
+
+.add-symptom-btn:hover {
+  background-color: #f507b9; /* Slightly darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.add-symptom-btn:active {
+  background-color: #f507b9; /* Darker green when clicked */
+  transform: scale(0.98); /* Slightly shrink the button */
+}
+
+.predicted-date {
+  margin-top: 20px;
+  padding: 10px;
+  /* background-color: #fbe8e8; */
+  /* border: 1px solid #ff6b6b; */
+  border-radius: 5px;
+  text-align: center;
+}
+.symptoms-prediction{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+  /* width: 550px; */
+}
+
+.predicted-date h2 {
+  color: #f507b9;
+  margin-bottom: 5px;
+}
+
+
+.highlighted-predicted-date {
+  background-color: #ffcccb !important; /* Light Red */
+  border-radius: 15px;
   
-    /* background: linear-gradient(to right, #dac9d1,#bdcdd1,  #b5c0cb); */
-  }
-  .track-period {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    left: 0%;
-    margin: 10px 10px;
-    margin-top: 10%;
-    margin-right: 15%;
-    padding: 10px;
-    box-sizing: border-box;
-    /* background: linear-gradient(to right, #edb9d1, #b2cbe4); */
-    gap: 5%;
-    /* border: solid 2px rgb(168, 168, 189);
-    border-radius: 15px; */
-  }
-  .track-period h1 {
-    text-align: center;
-    align-items: center;
-    color: #f507b9;
-    margin: 5px 10px;
-    padding: 5px;
-    font-family: var(--font-primary);
-    font-size: 35px;
-    font-weight: 550;
-    width: 100%;
-  }
-  .period-start{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-    gap: 18px;
-    width: 60%;
-  }
-  .period-start-label {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    margin: 2px;
-    padding: 5px;
-    width: 250px;
-    gap: 50px;
-  }
-  
-  .period-start-radio{
-    width: 25px!important;
-    height: 40px!important;
-    padding: 2px!important;
-  }
-  .period-prediction{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    width: 550px;
-  }
-  
-  .react-calendar{
-    width: 520px;
-  }
-  .track-period p {
-    text-align: center;
-    margin: 5px;
-    padding: 5px;
-    font-family: var(--font-secondary);
-    font-size: 18px;
-    font-weight: 500;
-  }
-  hr {
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid rgb(168, 168, 189);
-  }
-  
-  .period-date {
-    display: flex;
-    column-gap: 50px;
-    align-items: center;
-    margin: 15px;
-    margin-top: 25px;
-    width: 100%;
-  }
-  .period-date h4 {
-    padding: 0;
-    font-size: 16px;
-    margin-bottom: 10px;
-    font-family: var(--font-secondary);
-  }
-  
-  .custom-datepicker__input {
-    font-size: 18px; /* Increase the font size */
-    margin-right: 8%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .track-period .cycle-length {
-    text-align: center;
-    margin: 10px;
-    padding: 10px;
-    width: 100%;
-  }
-  
-  .cycle-length h4 {
-    font-family: var(--font-secondary);
-    font-size: 18px;
-  }
-  
-  .track-period .next-period h4 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 5px;
-    padding: 5px;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 18px;
-    font-family: var(--font-secondary);
-    font-weight: 450;
-    text-align: center;
-    margin: 10px;
-    padding: 10px;
-  }
-  
-  .track-period .img-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
-    /* margin: 10px; */
-    padding: 10px;
-    width: 40%;
-  }
-  .img-section .track-img {
-    width: 655px;
-    align-items: center;
-    margin-bottom: 5px;
-    margin-top: 17%;
-    margin-left: 40px;
-    margin-right: 20px;
-    border-radius: 15px;
-  }
-  
-  /* diet Plan css */
-  .diet-container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    column-gap: 10px;
-    padding: 0;
-    margin: 0;
-  }
-  .meal-plan {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .meal-photo {
-    padding-top: 25px;
-    width: 100%;
-    height: 400px; /* Adjust the height as needed for the banner */
-    overflow: hidden; /* Ensure the image doesn't overflow its container */
-    /* background: linear-gradient(to right, #edb9d1,  #b2cbe4);
-     */
-  }
-  .meal-photo h1 {
-    text-align: center;
-    margin: 5px;
-    padding-left: 20px;
-    font-family: var(--font-primary);
-    font-weight: 550;
-    font-size: 35px;
-  }
-  
-  .meal-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
-  }
-  .diet-content {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 10px 20%;
-    padding: 10px;
-    text-align: left;
-    text-wrap: wrap;
-    font-family: var(--font-secondary);
-  }
-  .diet-content h3 {
-    font-family: var(--font-primary);
-    font-size: 35px;
-    font-weight: 550;
-    color: #003b78;
-  }
-  .diet-content h2 {
-    font-family: var(--font-primary);
-    font-size: 35px;
-    font-weight: 550;
-    color: #003b78;
-  }
-  .diet-content p {
-    font-size: 18px;
-    font-weight: 500;
-    font-family: var(--font-secondary);
-    margin-bottom: 15px;
-  }
-  
-  .diet-content ul {
-    font-size: 18px;
-    font-weight: 500;
-    font-family: var(--font-secondary);
-  }
-  ul li {
-    margin: 5px;
-    padding: 5px;
-  }
-  ul li::marker {
-    color: #003b78; /* Change the bullet color */
-  }
-  
-  .modal-symptoms{
-    width: 100% !important;
-    height: 100% !important; ;
-    display: flex !;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-  
-  .modal-content-symptoms{
-    width: 30% !important;
-    display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      background: white;
-      height:500px !important;
-      padding: 20px;
-      border-radius: 8px;
-      /* text-align: left */
-  }
-  .symptoms-form{
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .form-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    margin-bottom: 10px;
-    gap: 30px;
-    flex-wrap: wrap;
-  }
-  
-  .symptoms-table{
-    width: 80%;
-    display: flex;
-    justify-content: flex-start;
-    border-collapse: collapse;
-    margin: 6px 0;
-    font-size: 18px;
-    font-family: var(--font-secondary);
-    font-weight: 500;
-    text-align: center;
-  }
-  
-  .symptoms-table  td, th {
-    /* padding: 10px!important; */
-    width: 100% !important;
-    margin-right: 10px !important;
-    padding:0  20px !important;
-  }
-  
-  .symptom-checkbox{
-    width: 25px!important;
-    height: 35px!important;
-    padding-left: 20px!important;
-    text-align: left;
-    margin-left: 90px;
-  }
-  
-  .close{
-    top: 10px;  /* Adjust the top distance */
-    right: 50px;
-    background: transparent;
-    border: none;
-    font-size: 36px; /* Increase the size */
-    cursor: pointer;
-    color: black;
-    transition: color 0.3s ease;
-  }
-  .add-symptom-btn {
-    background-color: #f507b9; /* Green background */
-    border: none; /* Remove default border */
-    color: white; /* White text */
-    padding: 15px 32px; /* Spacing inside the button */
-    text-align: center; /* Align text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Allows padding and margin */
-    font-size: 16px; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 12px; /* Rounded corners */
-    margin-top: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
-  }
-  
-  .add-symptom-btn:hover {
-    background-color: #f507b9; /* Slightly darker green on hover */
-    transform: scale(1.05); /* Slightly enlarge the button */
-  }
-  
-  .add-symptom-btn:active {
-    background-color: #f507b9; /* Darker green when clicked */
-    transform: scale(0.98); /* Slightly shrink the button */
-  }
-  
+  font-weight: bold;
+  color: #fa63c0;
+}
+
+.calendar-symptoms{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 40px;
+  margin: 10px;
+  padding: 10px;
+  /* width: 100%; */
+}
+
+.selected-symptoms{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px;
+  padding: 10px;
+  width: 550px;
+}
+.selected-symptoms h3{
+  color: #f507b9;
+}
+
+.pridction-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 22%;
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
+}

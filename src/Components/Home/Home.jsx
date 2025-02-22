@@ -1,5 +1,6 @@
 import React from "react";
 import "./home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -19,28 +20,39 @@ const Home = () => {
                 diagnosis the Reproductive health issues such as PCOS. <br />
                 <br />
                 Polycystic Ovary Syndrome <abbr>(PCOS)</abbr> is a common
-                hormonal disorder among women. We have developed this app to
+                hormonal disorder among women.
+                {/*  We have developed this app to
                 help women with polycystic ovary syndrome <abbr> (PCOS)</abbr>{" "}
                 find information of the highest quality from leading experts in
-                this field. It has been designed with women and for women with
-                polycystic ovary syndrome. <br />
+                this field. <br /> */}
+                It has been designed with women and for women with polycystic
+                ovary syndrome. <br />
                 <br />
-                Having PCOS is a journey of learning about the condition, of
+                {/* Having PCOS is a journey of learning about the condition, of
                 understanding how it impacts your life and of what you can do to
                 manage this. We are providing trustworthy information to learn
                 about the condition and support you to find the healthiest
-                possible lifestyle for you.
+                possible lifestyle for you. */}
               </p>
-              <button className="get-support">Get Support</button>
+              <Link to="/contact">
+                <button className="get-support">Get Support</button>
+              </Link>
             </div>
 
             <div className="col-lg-6">
               <div className="img-section">
                 <img
                   className="home-img"
-                  src="../assets/img/pcos2.png"
+                  src="../assets/img/image.png"
                   alt="Photo"
+                  style={{ width: "100%", height: "50" }}
                 />
+                {/* <img
+                  className="home-img"
+                  src="../assets/img/photo1.png"
+                  alt="Photo"
+                  style={{ width: "100%" , height: "70%"}}
+                /> */}
               </div>
             </div>
           </div>
@@ -54,27 +66,81 @@ const Home = () => {
           <div className="text col-lg-6">
             <div className="text-box">
               <p>
-                PCOS Relief is a charitable organisation (Charity Number:
-                SC051494) that has been established to provide support and
-                advice to those who have been diagnosed with any of the four
-                types of Polycystic Ovary Syndrome (PCOS). PCOS Relief will
-                assist bringing the forefront the actual condition itself and
-                highlight the possible preventative measures and support that is
-                available.
+                Sakhi is dedicated to supporting women diagnosed with Polycystic
+                Ovary Syndrome (PCOS) by raising awareness about its impact on
+                physical, emotional, and reproductive health. By integrating
+                innovative tools like machine learning for early diagnosis with
+                personalized care strategies, Sakhi aims to promote preventive
+                measures and provide accessible resources to improve health
+                outcomes.
               </p>
             </div>
           </div>
           <div className="text col-lg-6 ">
             <div className="text-box">
               <p>
-                We will develop a strategy of Campaigns to raise awareness about
-                PCOS and the impact it can have on females. We will be doing
-                this by engaging with Independent Medical Professionals as well
-                as the NHS and the Scottish / UK Government to reach out to the
-                wider public.
+                Through impactful campaigns, Sakhi highlights the challenges
+                posed by PCOS while advocating for better awareness and care.
+                Our focus remains on educating the public and fostering a
+                supportive space where women can access knowledge, tools, and
+                encouragement to manage their health and well-being effectively.
               </p>
             </div>
-            <button className="get-support">Get Support</button>
+            <Link to="/contact">
+              <button className="get-support">Get Support</button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="home-section-3">
+          <div className="section-3">
+            <div className="row objective-row">
+              <div className="main-purpose col-lg-6">
+                <div className="text-box">
+                  <h1>Our Objectives</h1>
+                  {""}
+                </div>
+                <h3>
+                  At Sakhi, we empower women with PCOS by raising awareness,
+                  offering symptom management resources, and using advanced
+                  analytics to predict PCOS risk for early intervention, helping
+                  them take control of their reproductive health.
+                </h3>
+              </div>
+              <div className="sub-purpose col-lg-6">
+                <div className="purpose row">
+                  <div className="purpose-title">
+                    <h3>PCOS Prediction:</h3>
+                  </div>
+                  <h3>
+                    Analyze non-clinical data using advanced algorithms to
+                    assess PCOS risk, reducing dependency on extensive medical
+                    tests.
+                  </h3>
+                </div>
+                <div className="purpose row">
+                  <div className="purpose-title">
+                    <h3>Menstrual Health Tracking:</h3>
+                  </div>
+                  <h3>
+                    Provide a smart period tracker to monitor cycles, detect
+                    irregularities, and offer insights for better reproductive
+                    health.
+                  </h3>
+                </div>
+
+                {/* <div className="purpose row">
+                  <div className="purpose-title">
+                    <h3> Offer Accessible Resources</h3>
+                  </div>
+                  <h3>
+                    Sakhi will be user-friendly platforms to share
+                    scientifically backed information and tools for tracking
+                    Period and predicting PCOS .{" "}
+                  </h3>
+                </div> */}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -104,7 +170,9 @@ const Home = () => {
                   of childbearing age.
                 </h3>
               </div>
-              <button className="get-support">Get Support</button>
+              <Link to="/contact">
+                <button className="get-support">Get Support</button>
+              </Link>
             </div>
           </div>
 
@@ -112,12 +180,15 @@ const Home = () => {
             <div className="col-lg-6">
               <div className="text-box">
                 <h3>
-                  Worldwide, polycystic ovary syndrome (PCOS) affects 1 in 10
-                  women, making it the most common endocrine disorder in women
-                  of childbearing age.
+                  Polycystic ovary syndrome, or PCOS, has become a common
+                  problem among ethnic minority women in the past few years. One
+                  in every five ethnic minority women is affected by this
+                  condition.
                 </h3>
               </div>
-              <button className="get-support">Get Support</button>
+              <Link to="/contact">
+                <button className="get-support">Get Support</button>
+              </Link>
             </div>
 
             <div className="col-lg-6">
@@ -132,45 +203,7 @@ const Home = () => {
           </div>
         </div>
         {/*  Fourth row started */}
-        <div className="home-section-3">
-          <div className="section-3">
-            <div className="row">
-              <div className="col-lg-6">
-                <div className="text-box">
-                  <h1>Our Purposes</h1>
-                </div>
-                <h3>
-                  At PCOS Relief, we focus on advancing PCOS education,
-                  promoting health, and fostering equality. We collaborate with
-                  professionals and communities to collect data, provide
-                  resources for symptom management, and raise
-                  awareness—particularly within Ethnic Minority communities.
-                </h3>
-              </div>
-              
-                  <div className="col-lg-6">
-                    <div className="text-box">
-                      <h3>Advancing PCOS Education</h3>
-                      <p>
-                        We provide educational resources to help individuals
-                        understand PCOS and its impact on their health.
-                      </p>
-                    </div>
-                  
-                    <div className="text-box">
-                      <h3>Promoting Health</h3>
-                      <p>
-                        We offer resources to help individuals manage their
-                        symptoms and improve their health.
-                      </p>
-                    </div>
-                 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
+      </div>
     </>
   );
 };

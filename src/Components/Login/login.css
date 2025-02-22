@@ -87,13 +87,13 @@ div {
     display: block;
 }
 
-h3 {
+/* h3 {
     font-size: 28px;
     font-weight: 400;
     margin-top: -10px;
     margin-left: 20px;
     letter-spacing: 0.2px;
-}
+} */
 
 .img {
     height: 200;
@@ -133,8 +133,7 @@ h2 {
 }
 
 .form-label {
-    
-    align-self: flex-start;
+    text-align: left;
     display: block;
     margin: 0 0 0 30px;
     color: rgb(28, 38, 177);
@@ -160,12 +159,13 @@ form .login-input {
 
 .login-btn{
     margin-top: 5px;
-    font-size: 20px;
+    font-size: 16px !important;
+    padding: 5px 10px;
     cursor: pointer;
     font-weight: bold; 
     letter-spacing: 0.25;
     width: 25%;
-    background-color: #af0b99;
+    background-color: #e71cb4;
     color: white;
     border: none;
     border-radius: 5px;
@@ -198,12 +198,35 @@ form .login-input {
     text-decoration: underline;
 }
 
-.form-body p{
+/* .form-body p{
     margin: 10px;
     font-size: large;
     font-family: var(--font-secondary);
-}
+} */
 
+
+.login-link{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+   
+    
+}
+.login-link-text{
+    font-size: medium;
+    font-family: var(--font-secondary);
+}
+.signup-link{
+    text-decoration:none;
+    color: blue;
+    font-weight: bold;
+}
+.signup-link:hover{
+    color: darkblue;
+    text-decoration: underline;
+}
 /* 
 width(input) milaunu parne
 button ra forget pass lai left allign

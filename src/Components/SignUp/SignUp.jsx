@@ -13,32 +13,32 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [submit, setSubmit] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState("");
 
-  useEffect(() => {
-    const initializeGoogleSignIn = () => {
-      window.google.accounts.id.initialize({
-        client_id:
-          "391082617038-81ad5f9mn36u9rfarj1b2qjnppb2du8m.apps.googleusercontent.com",
-        callback: onGoogleSignIn,
-      });
-      window.google.accounts.id.renderButton(
-        document.getElementById("google-signin-button"),
-        { theme: "outline", size: "large" }
-      );
-    };
+  // useEffect(() => {
+  //   const initializeGoogleSignIn = () => {
+  //     window.google.accounts.id.initialize({
+  //       client_id:
+  //         "391082617038-81ad5f9mn36u9rfarj1b2qjnppb2du8m.apps.googleusercontent.com",
+  //       callback: onGoogleSignIn,
+  //     });
+  //     window.google.accounts.id.renderButton(
+  //       document.getElementById("google-signin-button"),
+  //       { theme: "outline", size: "large" }
+  //     );
+  //   };
 
-    if (window.google && window.google.accounts) {
-      initializeGoogleSignIn();
-    } else {
-      const script = document.createElement("script");
-      script.src = "https://accounts.google.com/gsi/client";
-      script.async = true;
-      script.defer = true;
-      script.onload = initializeGoogleSignIn;
-      document.body.appendChild(script);
-    }
-  }, []);
+  //   if (window.google && window.google.accounts) {
+  //     initializeGoogleSignIn();
+  //   } else {
+  //     const script = document.createElement("script");
+  //     script.src = "https://accounts.google.com/gsi/client";
+  //     script.async = true;
+  //     script.defer = true;
+  //     script.onload = initializeGoogleSignIn;
+  //     document.body.appendChild(script);
+  //   }
+  // }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,51 +47,71 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("Form Inputs:", input);
     const formErrors = validateForm(input);
+
     if (Object.keys(formErrors).length === 0) {
+      console.log("Form is valid. Proceeding with submission.");
       setIsFormValid(true);
       setSubmit(true);
       setErrors({});
 
       try {
+    
+        
+
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/user/register/",
-          input,
+          "  https://sakhi-backend-tagn.onrender.com/api/user/register/",
+          input, // Pass form input as the payload
           {
             headers: {
               "Content-Type": "application/json",
-              Accept: "application/json",
             },
           }
         );
-
+        console.log("Sending data to the server...");
         const result = response.data;
-        localStorage.setItem("token", result.token);
-        navigate("/login"); // Navigate to login after successful registration
+        console.log("Server Response:", result);
+        navigate("/login"); 
+
+        // if (result.token) {
+        //   console.log("Token received, storing in localStorage..." , result.token);
+        //   localStorage.setItem("token", result.token);
+        //   console.log("Navigating to login...");
+        // navigate("/login"); 
+        // }
+
+        // Navigate to login after successful registration
       } catch (error) {
-        if (error.response) {
+        console.error("Error occurred during API call:", error);
+        if (!navigator.onLine) {
+          console.error("Network issue: You are offline.");
+          alert("Please check your internet connection and try again.");
+        } 
+         else if (error.response) {
           console.error("Response error:", error.response.data);
         } else if (error.request) {
           console.error("Request error:", error.request);
         } else {
-          console.error("Error", error.message);
+          console.error("General error:", error.message);
         }
-        console.error("Error config:", error.config);
       }
+
+      setInput({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
     } else {
-      setIsFormValid(false);
+      console.log("Form validation failed:", formErrors);
+     
+      console.log("Current input state:", input);
+
+     
       setErrors(formErrors);
       setSubmit(false);
     }
-
-    // Reset form input
-    setInput({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
   };
 
   const validateForm = (input) => {
@@ -110,33 +130,38 @@ const SignUp = () => {
     return errors;
   };
 
-  const onGoogleSignIn = async (response) => {
-    const id_token = response.credential;
+  //   const onGoogleSignIn = async (response) => {
+  //     const id_token = response.credential;
+  // if (!id_token) {
+  //       console.error("Google sign-in failed:", response.error);
+  //       return;
+  //     }
 
-    try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/api/user/google-signin/",
-        {
-          token: id_token,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  //     try {
+  //       const res = await axios.post(
+  //         "http://127.0.0.1:8000/api/user/google-signin/",
+  //         {
+  //           token: id_token,
+  //         },
+  //         {
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //         }
+  //       );
 
-      const data = res.data;
-      if (data.success) {
-        localStorage.setItem("token", data.token);
-        navigate("/"); // Redirect to home page after successful sign-in
-      } else {
-        console.error("Authentication failed:", data.message);
-      }
-    } catch (error) {
-      console.error("Error:", error.response || error.message);
-    }
-  };
+  //       const data = res.data;
+  //       if (data.success) {
+  //         localStorage.setItem("token", data.token);
+  //         navigate("/"); // Redirect to home page after successful sign-in
+  //       } else {
+  //         console.error("Authentication failed:", data.message);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error.response || error.message);
+  //     }
+
+  //   };
 
   return (
     <header>
@@ -147,7 +172,8 @@ const SignUp = () => {
             <div className="field">
               <h2 className="text-overlay">Welcome, to Sign In page</h2>
               <p className="text-overlay ">
-                Create an account to get started with Sakhi</p>
+                Create an account to get started with Sakhi
+              </p>
               <hr />
               <div className="form-group">
                 <label
@@ -223,7 +249,8 @@ const SignUp = () => {
                 </button>
               </div>
             </div>
-            <div
+          </form>
+          {/* <div
               className="mt-3 d-flex justify-content-center align-items-center"
               style={{ position: "relative", width: "100%" }}
             >
@@ -242,19 +269,18 @@ const SignUp = () => {
                   margin: "0 10px",
                 }}
               ></div>
-            </div>
-            <div className="mt-2 d-flex justify-content-center">
-              <div id="google-signin-button"></div>
-            </div>
-            <div className="mt-3 d-flex justify-content-center ">
-              <p className="ml-2 ">
-                Already have an account?{" "}
-                <Link to="/login" className="login-link">
-                  Login
-                </Link>
-              </p>
-            </div>
-          </form>
+            </div> */}
+          {/* <div className="mt-2 d-flex justify-content-center">
+            <div id="google-signin-button"></div>
+          </div> */}
+          <div className="mt-3 d-flex signup-link ">
+            <p className="signup-link-text ">
+              Already have an account?{" "}
+              <Link to="/login" className="login-link">
+                LogIn
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
       {/* </div> */}

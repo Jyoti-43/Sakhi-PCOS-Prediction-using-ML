@@ -2,24 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./login.css";
 import axios from "axios";
+import { useAuth } from "../ContextHook/AuthProvider";
 
-const Login = ({ isLoggedIn }) => {
+const Login = () => {
+  const {login , setAuthTokens }= useAuth();
   const [input, setInput] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
-  const navigate = useNavigate();
+  const loginNavigate = useNavigate();
   const location = useLocation();
   const redirectPath = location.state?.path || "/";
   const [error, setError] = useState({});
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate(redirectPath);
-    }
-  }, [navigate, redirectPath]);
+  
 
   const handleChange = (e) => {
     setInput({
@@ -32,73 +29,74 @@ const Login = ({ isLoggedIn }) => {
     });
   };
 
-  useEffect(() => {
-    const initializeGoogleSignIn = () => {
-      window.google.accounts.id.initialize({
-        client_id:
-          "391082617038-81ad5f9mn36u9rfarj1b2qjnppb2du8m.apps.googleusercontent.com",
-        callback: onGoogleSignIn,
-      });
-      window.google.accounts.id.renderButton(
-        document.getElementById("google-signin-button"),
-        { theme: "outline", size: "large" }
-      );
-    };
 
-    if (window.google && window.google.accounts) {
-      initializeGoogleSignIn();
-    } else {
-      const script = document.createElement("script");
-      script.src = "https://accounts.google.com/gsi/client";
-      script.async = true;
-      script.defer = true;
-      script.onload = initializeGoogleSignIn;
-      document.body.appendChild(script);
-    }
-  }, []);
-
-  const handleClick = () => navigate("/signUp");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("login_API_Here", input);
-      localStorage.setItem("token", response.data.token);
-      isLoggedIn(true);
-      navigate("/home"); // Redirect to home after successful login
-    } catch (error) {
-      console.log(error);
-      // Handle login error
+
+    if (input.email === "" || input.password === "") {
+      alert("Please enter both email and password.");
+      return;
     }
-  };
-
-  const onGoogleSignIn = async (response) => {
-    const id_token = response.credential;
 
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/api/user/google-signin/",
-        {
-          token: id_token,
-        },
-        {
+      console.log("Login inputs:", input);
+
+      const response = await axios.post(
+        "https://sakhi-backend-tagn.onrender.com/api/user/login/",
+        input,
+        { 
+         
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json", // Ensure JSON format
           },
         }
       );
 
-      const data = res.data;
-      if (data.success) {
-        localStorage.setItem("token", data.token);
-        navigate("/"); // Redirect to home page after successful sign-in
-      } else {
-        console.error("Authentication failed:", data.message);
+      const { token, msg } = response.data;
+      const { access, refresh } = token; // Extract access and refresh tokens
+      localStorage.setItem('authTokens', JSON.stringify({ accessToken: access, refreshToken: refresh }));
+
+      // const { access, refresh } = response.data; // Assuming this is returned by API
+
+      setAuthTokens({ accessToken: access, refreshToken: refresh }); // Set the tokens dynamically
+      console.log("Tokens received from API:", { access, refresh });
+      
+      if (access && refresh) {
+  
+        // console.log("Tokens saved to localStorage:", { access, refresh }); 
+        login(access, refresh); 
+        console.log("Login successful, tokens saved!");
+        loginNavigate(redirectPath || "/home"); 
       }
+       
+      else {  
+        console.error("Token not received:", response.data);
+        
+      }
+      
     } catch (error) {
-      console.error("Error:", error.response || error.message);
+      // Handle and log any errors
+      if (error.response) {
+        // Errors from the server
+        console.error("Login failed with response:", error.response);
+        alert(
+          error.response.data.detail ||
+            "Login failed. Please check your credentials."
+        );
+      } else if (error.request) {
+        // No response received
+        console.error("No response from server:", error.request);
+        alert("Unable to connect to the server. Please try again later.");
+      } else {
+        // Other errors
+        console.error("Unexpected error:", error.message);
+        alert("An error occurred during login. Please try again.");
+      }
     }
   };
+
+
 
   return (
     <header>
@@ -106,7 +104,7 @@ const Login = ({ isLoggedIn }) => {
         <div className="row login-body align-items-center">
           <div className="col login-logo mb-0">
             <img
-              src="./assets/img/Sakhi_Logo.png"
+              src="./assets/img/Sakhi-logo.png"
               alt="Logo"
               className="logo-img"
             />
@@ -132,7 +130,7 @@ const Login = ({ isLoggedIn }) => {
                   className="login-input"
                   type="email"
                   id="email"
-                  name="username"
+                  name="email"
                   placeholder="Email"
                   value={input.username}
                   onChange={handleChange}
@@ -159,11 +157,60 @@ const Login = ({ isLoggedIn }) => {
 
                   <div className="login">
                     <button type="submit" className="login-btn">
-                      SignIn
+                      LogIn
                     </button>
                   </div>
                 </div>
-                <div
+               
+                <div className="mt-3 d-flex login-link ">
+                  <p className="login-link-text ">
+                    Do not have an account?
+                    <Link to="/signup" className="signup-link">
+                      Register
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Login;
+
+
+  // useEffect(() => {
+  //   const initializeGoogleSignIn = () => {
+  //     window.google.accounts.id.initialize({
+  //       client_id:
+  //         "391082617038-81ad5f9mn36u9rfarj1b2qjnppb2du8m.apps.googleusercontent.com",
+  //       callback: onGoogleSignIn,
+  //     });
+  //     window.google.accounts.id.renderButton(
+  //       document.getElementById("google-signin-button"),
+  //       { theme: "outline", size: "large" }
+  //     );
+  //   };
+
+  //   if (window.google && window.google.accounts) {
+  //     initializeGoogleSignIn();
+  //   } else {
+  //     const script = document.createElement("script");
+  //     script.src = "https://accounts.google.com/gsi/client";
+  //     script.async = true;
+  //     script.defer = true;
+  //     script.onload = initializeGoogleSignIn;
+  //     document.body.appendChild(script);
+  //   }
+  // }, []);
+
+  // const handleClick = () => navigate("/signUp");
+
+
+   /* <div
                   className="mt-3 d-flex justify-content-center align-items-center"
                   style={{ position: "relative", width: "100%" }}
                 >
@@ -182,23 +229,36 @@ const Login = ({ isLoggedIn }) => {
                       margin: "0 10px",
                     }}
                   ></div>
-                </div>
-                <div className="mt-2 d-flex justify-content-center">
+                </div> */
+                /* <div className="mt-2 d-flex justify-content-center">
                   <div id="google-signin-button"></div>
-                </div>
-                <p>
-                  Do not have an account?{" "}
-                  <Link to="/signup" className="signup-link">
-                    SignUp
-                  </Link>{" "}
-                </p>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-};
+                </div> */
 
-export default Login;
+
+                  // const onGoogleSignIn = async (response) => {
+  //   const id_token = response.credential;
+
+  //   try {
+  //     const res = await axios.post(
+  //       "http://127.0.0.1:8000/api/user/google-signin/",
+  //       {
+  //         token: id_token,
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+
+  //     const data = res.data;
+  //     if (data.success) {
+  //       localStorage.setItem("token", data.token);
+  //       navigate("/"); // Redirect to home page after successful sign-in
+  //     } else {
+  //       console.error("Authentication failed:", data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error.response || error.message);
+  //   }
+  // };

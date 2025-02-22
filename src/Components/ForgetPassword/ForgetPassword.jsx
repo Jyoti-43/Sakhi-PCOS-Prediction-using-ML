@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import axios from "axios";
-import "./forgetPassword.module.css";
+import "./forgetPassword.css";
 import { Link } from "react-router-dom";
 
 
 const ResetOTP = () => {
+ 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
@@ -16,7 +17,7 @@ const ResetOTP = () => {
     try {
       // Sending email to server to send reset password link
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/user/reset-password/",
+        "https://sakhi-backend-tagn.onrender.com/api/user/sendresetpasswordemail/",
         { email },
         {
           headers: {
@@ -28,7 +29,7 @@ const ResetOTP = () => {
 
       const result = response.data;
       setMessage("A reset password link has been sent to your email.");
-      
+      console.log("Server Response:", result);
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -46,10 +47,10 @@ const ResetOTP = () => {
   };
 
   return (
-    <div className="container">
+    <div className="forgot-container">
       <div className="row">
-        <div className="card">
-          <div className="card-body">
+        <div className="forgot-card">
+          <div className="forgot-card-body">
             <h1>Forgot Password</h1>
             <hr />
             <p>Please enter your email to send a reset password link.</p>
@@ -68,7 +69,7 @@ const ResetOTP = () => {
               <button onClick={handleSendResetLink}>Send Reset Link</button>
               {message && <p className="message">{message}</p>}
             </div>
-            <Link to="/changePassword"> <p>Change Password</p></Link>
+            {/* <Link to="/reset-password/:uid/:token"> <p>Reset Password</p></Link> */}
           </div>
         </div>
       </div>

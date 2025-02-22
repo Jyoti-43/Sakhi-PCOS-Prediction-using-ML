@@ -9,11 +9,15 @@ import axios from "axios";
 const ScheduleView = () => {
   const [period_date, setSelectedDate] = useState(new Date());
   const [predictedNextPeriod, setPredictedNextPeriod] = useState(null);
-  const [categories, setCategories] = useState([]); // Store symptom categories
-  const [symptoms, setSymptoms] = useState([]); // Store symptoms of selected category
-  const [selectedSymptoms, setSelectedSymptoms] = useState([]); // Store selected symptoms
-  const [selectedCategory, setSelectedCategory] = useState(null); // Store selected category
+  const [categories, setCategories] = useState([]);
+  const [symptoms, setSymptoms] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [selectedSymptomsNames, setSelectedSymptomsNames] = useState([]);
+  // const [selectedSymptomsByCategory, setSelectedSymptomsByCategory] = useState({});
+
   const { tokens } = useAuth();
   const navigate = useNavigate();
 
@@ -23,14 +27,26 @@ const ScheduleView = () => {
     }
   }, [tokens.accessToken, navigate]);
 
-  // Fetch categories and symptoms from the backend
+  // Fetch categories from backend
+
   useEffect(() => {
+    const storedLastPeriod = localStorage.getItem("lastPeriodDate");
+    const storedPredictedPeriod = localStorage.getItem("predictedPeriodDate");
+
+    if (storedLastPeriod) {
+      setSelectedDate(new Date(storedLastPeriod));
+    }
+
+    if (storedPredictedPeriod) {
+      setPredictedNextPeriod(new Date(storedPredictedPeriod));
+    }
+
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
           "https://sakhi-backend-tagn.onrender.com/api/user/symptom-categories/"
         );
-        setCategories(response.data); // Set categories data from backend
+        setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -46,9 +62,9 @@ const ScheduleView = () => {
           const response = await axios.get(
             `https://sakhi-backend-tagn.onrender.com/api/user/symptoms/${selectedCategory}/`
           );
-          setSymptoms(response.data); // Set symptoms data based on selected category
+          setSymptoms(response.data);
         } catch (error) {
-          console.error("Error fetching symptoms:", error);
+          console.error("Error fetching  selected symptoms:", error);
         }
       };
 
@@ -58,25 +74,67 @@ const ScheduleView = () => {
 
   const handleSymptomChange = (event) => {
     const { value, checked } = event.target;
-    if (checked) {
-      setSelectedSymptoms((prevSelected) => [...prevSelected, value]); // Add selected symptom
-    } else {
-      setSelectedSymptoms(
-        (prevSelected) => prevSelected.filter((symptom) => symptom !== value) // Remove unselected symptom
-      );
-    }
+    const symptomId = parseInt(value, 10); // Convert value to number
+
+    setSelectedSymptoms((prevSelected) => {
+      let updatedSymptoms = [...prevSelected]; // Clone the previous state to avoid direct mutation
+
+      if (checked) {
+        // Add the selected symptom ID to the list if it's not already there
+        if (!updatedSymptoms.includes(symptomId)) {
+          updatedSymptoms.push(symptomId);
+        }
+      } else {
+        // Remove the deselected symptom ID from the list
+        updatedSymptoms = updatedSymptoms.filter((id) => id !== symptomId);
+      }
+
+      return updatedSymptoms;
+    });
   };
+
+  // const handleSymptomChange = (event) => {
+  //   const { value, checked } = event.target;
+  //   setSelectedSymptoms((prevSelected) =>
+  //     checked
+  //       ? [...prevSelected, value]
+  //       : prevSelected.filter((symptom) => symptom !== value)
+  //   );
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
-    const symptomsToSubmit =
-      selectedSymptoms.length > 0 ? selectedSymptoms : [];
+    if (!period_date) {
+      console.error("Error: Period date is missing.");
+      return;
+    }
+
+    if (!symptoms || symptoms.length === 0) {
+      console.error("Error: No symptoms selected.");
+      return;
+    }
+
+    if (selectedSymptoms.length === 0) {
+      alert("Please select at least one symptom before submitting.");
+      return;
+    }
+
+    const requestData = {
+      period_date: new Date(period_date).toISOString().split("T")[0], // Converts to 'YYYY-MM-DD'
+      symptoms: selectedSymptoms,
+      // symptoms: selectedSymptoms.id, // Ensure this is an array of strings
+    };
+
+    console.log("Selected data:", requestData);
 
     try {
       const response = await axios.post(
         "https://sakhi-backend-tagn.onrender.com/api/user/track-symptom/",
-        { symptoms: symptomsToSubmit },
+
+        requestData,
         {
           headers: {
             Authorization: `Bearer ${tokens.accessToken}`,
@@ -84,16 +142,39 @@ const ScheduleView = () => {
           },
         }
       );
+      // Update the symptoms state with names for display purposes
+      const symptomNames = symptoms
+        .filter((symptom) => selectedSymptoms.includes(symptom.id))
+        .map((symptom) => symptom.name);
+
+      // Store selected symptoms' names in a new state to display
+      setSelectedSymptomsNames(symptomNames);
+
+      console.log("Symptoms name:", symptomNames);
+
       console.log("Symptoms submitted successfully:", response.data);
       alert("Symptoms submitted successfully.");
+      setSelectedSymptoms([]);
+      setShowModal(false);
     } catch (error) {
-      console.error("Error submitting symptoms:", error);
-      alert("Failed to submit symptoms. Please try again.");
+      if (error.response) {
+        // Server responded with a non-2xx status
+        console.error("Error submitting symptoms:", error.response.data);
+        // alert(`Failed to submit symptoms: ${error.response.data}`);
+      } else if (error.request) {
+        // No response received from server
+        console.error("No response from server:", error.request);
+        alert("No response from server. Please try again.");
+      } else {
+        // Some other error occurred
+        console.error("Error setting up request:", error.message);
+        alert("Error while setting up the request. Please try again.");
+      }
     }
   };
 
   const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value); // Update selected category
+    setSelectedCategory(event.target.value);
   };
 
   const handleClick = () => {
@@ -111,8 +192,7 @@ const ScheduleView = () => {
       }
 
       const formattedDate = date.toISOString().split("T")[0];
-      console.log("Selected Date:", formattedDate);
-
+      localStorage.setItem("lastPeriodDate", formattedDate);
       const response = await axios.post(
         "https://sakhi-backend-tagn.onrender.com/api/user/track-period/",
         { period_date: formattedDate },
@@ -124,6 +204,11 @@ const ScheduleView = () => {
         }
       );
 
+      // if (response.data?.predicted_period) {
+      //   const predictedDate = response.data.predicted_period;
+      //   localStorage.setItem("predictedPeriodDate", predictedDate);
+      //   setPredictedNextPeriod(new Date(predictedDate));
+      // }
       console.log("Period tracked successfully!", response.data);
       fetchPredictedPeriod(date);
     } catch (error) {
@@ -140,8 +225,10 @@ const ScheduleView = () => {
       if (!periodStartDate) return;
       const nextPeriodDate = new Date(periodStartDate);
       nextPeriodDate.setDate(nextPeriodDate.getDate() + 28);
+
+      localStorage.setItem("predictedPeriodDate", nextPeriodDate.toISOString());
+
       setPredictedNextPeriod(nextPeriodDate);
-      console.log("Predicted Next Period Date:", nextPeriodDate);
     } catch (error) {
       console.error("Error predicting next period:", error.message);
       alert("Unable to predict the next period. Please try again.");
@@ -153,7 +240,7 @@ const ScheduleView = () => {
       predictedNextPeriod &&
       date.toDateString() === predictedNextPeriod.toDateString()
     ) {
-      return "predicted-period"; // Add CSS class for styling
+      return "highlighted-predicted-date";
     }
     return null;
   };
@@ -162,7 +249,7 @@ const ScheduleView = () => {
     <div className="track-period">
       <h1>Period Tracker</h1>
       <p>Please Select Period Start date</p>
-      <div>
+      <div className="calendar-symptoms">
         <Calendar
           onClickDay={handleDateChange}
           value={period_date}
@@ -170,14 +257,36 @@ const ScheduleView = () => {
           maxDate={new Date("2030-12-31")}
           tileClassName={tileClassName}
         />
+        <div className="selected-symptoms">
+          <h3>
+            {" "}
+            <strong>Selected Symptoms:</strong>{" "}
+          </h3>
+          {selectedSymptomsNames.length > 0 ? (
+            <ul>
+              {selectedSymptomsNames.map((name, index) => (
+                <li key={index}>{name}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No symptoms selected yet.</p>
+          )}
+        </div>
       </div>
+      <div className="pridction-btn">
+        {predictedNextPeriod && (
+          <div className="predicted-date">
+            <h2>Predicted Period Date:</h2>
+            <p>{predictedNextPeriod.toLocaleDateString()}</p>
+          </div>
+        )}
 
-      <div className="symptom-container">
-        <button className="add-symptom-btn" onClick={handleClick}>
-          Add Symptoms
-        </button>
+        <div className="symptom-container">
+          <button className="add-symptom-btn" onClick={handleClick}>
+            Add Symptoms
+          </button>
+        </div>
       </div>
-
       {showModal && (
         <div className="modal modal-symptoms">
           <div className="modal-content modal-content-symptoms">
@@ -194,11 +303,10 @@ const ScheduleView = () => {
               </div>
               <hr />
 
-              {/* Dropdown to select category */}
               <div className="category-select">
                 <label>Select Category</label>
                 <select
-                  value={selectedCategory}
+                  value={selectedCategory || ""}
                   onChange={handleCategoryChange}
                   required
                 >
@@ -211,17 +319,17 @@ const ScheduleView = () => {
                 </select>
               </div>
 
-              {/* Symptoms table */}
               <table className="symptoms-table">
                 <tbody>
                   {symptoms.map((symptom) => (
                     <tr className="symptom-items" key={symptom.id}>
                       <td>{symptom.name}</td>
+
                       <td>
                         <input
                           className="symptom-checkbox"
                           type="checkbox"
-                          value={symptom.name}
+                          value={symptom.id}
                           onChange={handleSymptomChange}
                         />
                       </td>
@@ -242,100 +350,3 @@ const ScheduleView = () => {
 };
 
 export default ScheduleView;
-
-
-// import "./trackperiod.css";
-// import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import moment from "moment";
-// import CustomCalendar from "./Calender";
-// import SymptomSelection from "./Symptoms";
-// import { useAuth } from "../ContextHook/AuthProvider";
-
-// const TrackPeriod = () => {
-//   const [periodStart, setPeriodStart] = useState(null);
-//   const [selectedDate, setSelectedDate] = useState(null);
-
-//   const navigate = useNavigate();
-//   const tokens = useAuth();
-
-//   useEffect(() => {
-//     if (tokens === undefined) return;
-
-//     if (!tokens?.accessToken) {
-//       navigate("/login"); // Redirect to login if not authenticated
-//     }
-//   }, [tokens, navigate]);
-
-//   const handleDateClick = (date) => {
-//     const formattedDate = date.format("YYYY-MM-DD");
-//     setSelectedDate(formattedDate);
-
-//     if (date.isBefore(moment(), "day") || date.isSame(moment(), "day")) {
-//       setPeriodStart(formattedDate);
-//     } else {
-//       setPeriodStart(null);
-//     }
-//   };
-
-//   const sendPeriodStartToBackend = async (date) => {
-//     try {
-//       const accessToken = tokens.accessToken;
-//       if (!accessToken) {
-//         console.log("No token found. Please login again.");
-//         return;
-//       }
-
-//       const response = await axios.post(
-//         "https://sakhi-backend-tagn.onrender.com/api/user/track-period-start/",
-//         { period_start_date: date },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${accessToken}`,
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-//       if (response.status === 200) {
-//         console.log("Period start date sent successfully:", response.data);
-//       }
-//     } catch (error) {
-//       console.error("Error sending period start date:", error);
-//     }
-//   };
-
-//   const handlePeriodStartChange = (event) => {
-//     if (event.target.checked && selectedDate) {
-//       sendPeriodStartToBackend(selectedDate);
-//     }
-//   };
-
-//   return (
-//     <div className="period-container">
-//       <div className="track-content">
-//         <div className="row track-section">
-//           <div className="track-period">
-//             <div className="col-lg-6">
-//               <p>Select period start date:</p>
-//               {/* <CustomCalendar
-//                 tokens={tokens} // Pass entire tokens object
-//                 periodStart={periodStart}
-//                 selectedDate={selectedDate}
-//                 handleDateClick={handleDateClick}
-//                 handlePeriodStartChange={handlePeriodStartChange}
-//               /> */}
-//             </div>
-//             <div className="col-lg-6">
-//               <p>Add Symptoms</p>
-//               <SymptomSelection />
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default TrackPeriod;

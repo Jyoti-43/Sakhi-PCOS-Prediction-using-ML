@@ -88,16 +88,28 @@ input{
     background-color: aliceblue;
 }
 .submit-button{
-    background-color: #af0b99;
+    background-color: #e71cb4;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    padding: 15px 25px;
-    font-size: x-large;
+    padding: 6px 15px;
+    margin: 10px;
+    font-size: large;
     font-weight: bold;
     font-family: var(--font-secondary);
+}
+
+.signup-link{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-left: 25%;
     
+}
+.signup-link-text{
+    font-size: medium;
+    font-family: var(--font-secondary);
 }
 .login-link{
     text-decoration:none;
@@ -111,4 +123,10 @@ input{
 .signup-form div p{
     font-size: large;
    font-family: var(--font-secondary);
+}
+
+.error{
+    color: red;
+    
+    font-family: var(--font-secondary);
 }
